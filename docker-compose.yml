@@ -1,0 +1,19 @@
+#version of docker-compose
+version: "3.9"
+
+#services
+services:
+  backend: # name of services that we need
+    build: . # find Dockerfile DIR
+    container_name: backend-todo # set container_name
+    ports:
+      - "8080:8000" # map porting <sys port>:<container port>
+    command: python manage.py runserver 0.0.0.0:8000 
+    # set many command with && sign
+    volumes:
+      - ./:/app
+    environment:
+      - SECRET_KEY=test
+      - DEBUG=True
+
+# docker-compose up --build

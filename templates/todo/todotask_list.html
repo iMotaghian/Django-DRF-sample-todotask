@@ -1,0 +1,21 @@
+<a href="{% url 'todo-CreateView' %}" >Add New Task</a> - <a href="{% url 'logout' %}">Logout</a>
+<h1>Running To Do Tasks</h1>
+<ul>
+{% for task in tasks %}
+{% if task.status == 'running' %}
+    <li><span style="font-size: 24px;">{{ task.task }}</span> <span style="font-size: 12px;">- <a href="{% url 'todo-TaskDone' pk=task.id %}" >Done</a> | <a href="{% url 'todo-UpdateView' pk=task.id %}" >Edit</a> | <a href="{% url 'todo-DeleteView' pk=task.id %}" >Delete</a></span></li>
+{% endif %}
+{% empty %}
+    <li>No tasks yet.</li>
+{% endfor %}
+</ul>
+<h1>Done</h1>
+<ul>
+{% for task in tasks %}
+{% if task.status == 'done' %}
+    <li><span style="font-size: 24px;">{{ task.task }}</span> <span style="font-size: 12px;">- <a href="{% url 'todo-TaskRun' pk=task.id %}" >Running</a> | <a href="{% url 'todo-UpdateView' pk=task.id %}" >Edit</a> | <a href="{% url 'todo-DeleteView' pk=task.id %}" >Delete</a></span></li>
+{% endif %}
+{% empty %}
+    <li>No tasks yet.</li>
+{% endfor %}
+</ul>
